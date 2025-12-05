@@ -1,6 +1,7 @@
 import json
 import boto3
 import os
+import re
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
@@ -20,7 +21,7 @@ GUARDRAIL_VERSION = os.environ.get('GUARDRAIL_VERSION', 'DRAFT')
 # boto3 will automatically use the Lambda's Execution Role permissions
 bedrock_agent_runtime = boto3.client(
     service_name='bedrock-agent-runtime',
-    region_name=REGION_NAME
+    region_name='ap-southeast-2'
 )
 
 
@@ -35,6 +36,7 @@ def retrieve_and_generate_response(query: str):
                 'knowledgeBaseId': KNOWLEDGE_BASE_ID,
                 'modelArn': MODEL_ARN
             }
+
             # This code isn't working
             # },
             # 'guardrailConfiguration': {
@@ -60,8 +62,16 @@ def retrieve_and_generate_response(query: str):
                             'source_uri': source_uri
                         })
 
+        short_answer_match = re.split(r'[.!?]', generated_text, 1)
+        short_answer = short_answer_match[0].strip() + '.' if \
+        short_answer_match[0].strip() else "No short answer available."
+
+        certainty_score = "High" if citations else "Low/No Context"
+
         return {
             'answer': generated_text,
+            'short_answer': short_answer,
+            'certainty': certainty_score,
             'citations': citations
         }
 
