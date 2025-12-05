@@ -1,0 +1,8 @@
+torch
+transformers
+accelerate
+flask
+gunicorn                 # Production web server
+pydantic
+scipy
+bitsandbytes             # Will be used later in Phase 7 for optimization
