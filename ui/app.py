@@ -5,7 +5,7 @@ import time  # For showing the latency in the UI
 
 # --- CONFIGURATION ---
 # Replace this with the INVOKE URL of your deployed API Gateway /query stage
-API_GATEWAY_URL = "https://oqn6cgfx29.execute-api.ap-southeast-2.amazonaws.com/prod/query"
+API_GATEWAY_URL = "https://50p1o019sf.execute-api.us-east-1.amazonaws.com/prod/query"
 
 # --- UI SETUP ---
 st.set_page_config(

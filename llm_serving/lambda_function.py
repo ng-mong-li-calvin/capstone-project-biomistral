@@ -9,19 +9,19 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 # --- Configuration (Set as Lambda Environment Variables) ---
 # NOTE: The actual values are pulled from the Lambda's Environment Variables.
 # We use os.environ.get() here.
-KNOWLEDGE_BASE_ID = os.environ.get('KNOWLEDGE_BASE_ID', '3KS3EC5RZV')
+KNOWLEDGE_BASE_ID = os.environ.get('KNOWLEDGE_BASE_ID', 'D7LNYAEDOD')
 REGION_NAME = os.environ.get('AWS_REGION',
-                             'ap-southeast-2')  # AWS automatically sets the region
+                             'us-east-1')  # AWS automatically sets the region
 MODEL_ARN = os.environ.get('MODEL_ARN',
-                           'arn:aws:bedrock:ap-southeast-2::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0')
-GUARDRAIL_ID = os.environ.get('GUARDRAIL_ID', 'gr-qtktcbjlc2rh')
-GUARDRAIL_VERSION = os.environ.get('GUARDRAIL_VERSION', 'DRAFT')
+                           'arn:aws:sagemaker:us-east-1:144675714287:endpoint/biomistral-7b-gguf')
+# GUARDRAIL_ID = os.environ.get('GUARDRAIL_ID', 'gr-qtktcbjlc2rh')
+# GUARDRAIL_VERSION = os.environ.get('GUARDRAIL_VERSION', 'DRAFT')
 
 # Initialize the Bedrock Agent Runtime client
 # boto3 will automatically use the Lambda's Execution Role permissions
 bedrock_agent_runtime = boto3.client(
     service_name='bedrock-agent-runtime',
-    region_name='ap-southeast-2'
+    region_name='us-east-1'
 )
 
 
